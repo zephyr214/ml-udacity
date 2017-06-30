@@ -13220,7 +13220,7 @@ QmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong>
-随着训练数据量的增加，训练曲线先下降后收敛，测试曲线先上升后收敛。如果增大训练数据，可能无法有效的提升模型的表现，因为随着训练数据增加，训练和测试曲线到最后都会收敛到特定的值。</p>
+我选择第二幅图像，最大深度为3。随着训练数据量的增加，训练曲线的评分从1.0开始逐步下降到0.8左右后收敛，而测试曲线从0.0开始逐步上升到0.8左右后收敛，训练和测试曲线的变化，在数据量增加到300左右的时候趋于平稳。如果增大训练数据，可能无法有效的提升模型的表现，因为随着训练数据增加，训练和测试曲线的评分值到最后都会收敛到特定的值（0.8左右）。</p>
 
 </div>
 </div>
@@ -13759,7 +13759,8 @@ AAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>回答: </strong>
-网格搜索法用于系统地遍历多种参数组合，通过交叉验证来确定最佳效果参数。一般结合交叉验证来进行网格搜索，当用K折交叉验证来跑网格搜索时，相当于把每个参数组合，都试K次，最终比较每个参数K次训练的平均效果，取最好的一种，以此达到优化学习算法目的。</p>
+网格搜索法用于系统地遍历模型的多种参数组合，通过交叉验证来确定最佳效果参数。例如对于一个决策树模型，其有一个参数叫max_depth，那么就可以通过网格搜索法将max_depth的所有可能值都试一次，取效果最好的一种。一般结合交叉验证来进行网格搜索，当用K折交叉验证来跑网格搜索时，相当于把每个参数组合，都试K次，最终比较每个参数K次训练的平均效果，取最好的一种，以此达到优化学习算法目的。
+交叉验证只是用来帮助网格搜索评估各种参数组合的效果的，实际上网格搜索也可以不用交叉验证，而用其它的评估方式。</p>
 
 </div>
 </div>
@@ -13781,7 +13782,9 @@ AAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong>
-当用K折交叉验证来跑网格搜索时，相当于把每个参数组合，都试K次，最终比较每个参数K次训练的平均效果，取最好的一种，以此达到优化学习算法目的。网格搜索时如果不使用交叉验证，会导致参数的验证结果不够泛化，最终寻找出来的参数只能适用某一种数据特征，不适应所有数据。</p>
+所谓的K折交叉验证法，即将训练数据平均分成K等份，每个等份均做一次验证集，其余做训练集，最终将K次的验证结果平均以做为最终评分结果。</p>
+<p>当用K折交叉验证来跑网格搜索时，相当于把每个参数组合，都试K次，最终比较每个参数K次训练的平均效果，取最好的一种，以此达到优化学习算法目的。网格搜索时如果不使用交叉验证，会导致参数的验证结果不够泛化，最终寻找出来的参数只能适用某一种数据特征，不适应所有数据。</p>
+<p>交叉验证是在不碰测试集的情况下，只用训练集和模型本身来检验模型表现的一种方法，除了K折交叉验证外，还有其它的交叉验证方法。</p>
 
 </div>
 </div>
@@ -14013,13 +14016,15 @@ Predicted selling price for Client 3&#39;s home: $929,345.45
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong></p>
 <ul>
-<li><p>建议客户1的房屋销售价为: $408,240.00，其房间数一般，但社区贫困指数不低，且师资力量匮乏，因此预测的房价合理；</p>
+<li><p>建议客户1的房屋销售价为: $408,240.00；</p>
 </li>
-<li><p>Predicted selling price for Client 2's home: $231,238.64，房间数少，社区贫困指数高，师资力量也是最匮乏的，价格所以最低；</p>
+<li><p>Predicted selling price for Client 2's home: $231,238.64；</p>
 </li>
-<li><p>Predicted selling price for Client 3's home: $929,345.45，房间数最多，且社区贫困指数非常低，师资力量也是三者中最好的，所以房价预测出来最高，合理；</p>
+<li><p>Predicted selling price for Client 3's home: $929,345.45；</p>
 </li>
 </ul>
+<p>从之前的统计分析来看，客户3的房价非常接近Maximum price，再看客户3的房屋特征，房间数最多，有8间，且贫困指数非常低只有3，另外平均12个学生配一位老师，说明教育水平也是相当高的，所以基本是符合这个价位。
+对于客户1，除社区贫困指数外，其余数据和客户3落差没有特别大（20% ~ 50%左右），所以其房价处在平均水平是合理的。而对于客户2，各项数据都是最差的，因此房价会比客户1还要低，最终的房价是客户3 &gt; 客户1 &gt; 客户2，符合之前数据统计的预期。</p>
 
 </div>
 </div>
@@ -14094,13 +14099,15 @@ Range in prices: $69,044.61
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>答案: </strong></p>
+<p><strong>答案: </strong>
+该模型在现实世界中可能不太适合，原因如下：</p>
 <ul>
-<li>1978年所采集的数据，在今天已然不太适用，因为市场趋势已经发生变化，且人对房屋的价值判断标准也变了；</li>
-<li>数据中呈现的特征较少，不能足够描述一个房屋，例如还有地段、交通、周边平均房价、小区环境等；</li>
-<li>模型算是比较健壮，因为从上述10次执行结果来看，价格落差多数在3%左右，且预测的准确率也较高；</li>
-<li>在波士顿这样的大都市采集的数据，可能不太适用在其它乡镇地区，因为大家对房屋的价值认知可能不一致；</li>
+<li>训练数据来自于1978年，而当今的市场趋势、消费理念等都已经发生巨大变化，导致房屋的价值评判标准发生变化，所以之前的特征已不再适用；</li>
+<li>该数据集中使用的特征较少，不能足够描述一个房屋价值，在当今社会，还有更多的特征影响着房屋的价格，如地段、交通、周边平均房价、小区环境等。</li>
+<li>模型的健壮还有待提升，正如上述所说，过少的特征可能将导致模型欠拟合，无法保证对所有可能的情况输出一致的预测。从上面10次预测结果来看，模型的预测结果会随着训练集的不同而体现出大大小小的差异；</li>
+<li>最后，该数据集是来自波士顿这样的大都市，其可能不太适用在其它乡镇地区，因为城市和乡镇对房屋的价值认知是不一致的，大都市可能更注重交通、繁华程度等，而乡镇更注重环境、空气等；</li>
 </ul>
+<p>综上所述，如果要在现实世界中使用该模型，我们还需要寻找更多的数据集，优化模型特征，以使得模型能够适应更多的情况。</p>
 
 </div>
 </div>
@@ -14141,7 +14148,7 @@ Range in prices: $69,044.61
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="c1"># 构建模型训练函数</span>
+<span class="c1"># 构建模型训练函数（内涵网格搜索）</span>
 <span class="k">def</span> <span class="nf">fit_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="n">model_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
@@ -14248,7 +14255,7 @@ Price for our house is [ 273.56613372]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>答案：</strong></p>
+<p><strong>答案：</strong> 273.57</p>
 
 </div>
 </div>
